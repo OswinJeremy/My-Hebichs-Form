@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Data</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>New Family Entry</title>
+    
+    <style>
+        :root { --bg-color: #f0f2f5; --text-color: #1d1d1f; --glass-bg: rgba(255, 255, 255, 0.95); --glass-border: rgba(255, 255, 255, 0.5); --primary-color: #007aff; --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.1); --input-bg: rgba(255, 255, 255, 0.6); --success-color: #34c759; --error-color: #ff3b30; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); min-height: 100vh; padding-bottom: 50px; }
+        .background-blobs { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; filter: blur(80px); opacity: 0.6; }
+        .blob { position: absolute; border-radius: 50%; animation: move 20s infinite alternate; }
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #a29bfe; }
+        .blob-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: #74b9ff; animation-delay: -5s; }
+        .blob-3 { top: 40%; left: 40%; width: 40vw; height: 40vw; background: #fab1a0; opacity: 0.4; animation-delay: -10s; }
+        @keyframes move { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(30px, -30px) scale(1.1); } }
+        .main-container { display: flex; justify-content: center; padding: 40px 20px; }
+        .glass-card { background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 24px; padding: 40px; width: 100%; max-width: 600px; box-shadow: var(--shadow-lg); text-align: left; }
+        h1 { text-align: center; margin-bottom: 5px; font-weight: 800; font-size: 28px; }
+        .subtitle { text-align: center; opacity: 0.6; margin-bottom: 30px; font-size: 14px; }
+        .section-badge { background: var(--primary-color); color: white; display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; }
+        .input-label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; opacity: 0.6; margin-bottom: 8px; margin-top: 20px; letter-spacing: 0.5px; }
+        input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #ccc; background: var(--input-bg); color: var(--text-color); font-size: 16px; outline: none; transition: 0.2s; }
+        input:focus { border-color: var(--primary-color); background: white; }
+        .row-inputs { display: flex; gap: 15px; }
+        .half-width { width: 50%; }
+        .divider { border-top: 1px solid rgba(0,0,0,0.1); margin: 30px 0; }
+        .location-group { display: flex; gap: 10px; align-items: stretch; }
+        #mapText { flex-grow: 1; }
+        .gps-btn { white-space: nowrap; padding: 0 20px; background: rgba(52, 199, 89, 0.1); color: #27ae60; border: 1px solid rgba(52, 199, 89, 0.3); border-radius: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+        .gps-btn.done { background: var(--success-color); color: white; border-color: transparent; }
+        .section-title { font-size: 18px; font-weight: 600; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: baseline; }
+        .light-text { font-size: 13px; opacity: 0.5; font-weight: 400; }
+        .member-card { background: #fff; border: 1px solid var(--glass-border); border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .member-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 10px; margin-bottom: 15px; }
+        .member-title { font-weight: 600; font-size: 14px; color: var(--primary-color); }
+        .remove-btn { background: rgba(255, 59, 48, 0.1); color: var(--error-color); border: none; font-size: 11px; padding: 5px 10px; border-radius: 6px; cursor: pointer; font-weight: 600; }
+        .add-member-btn { width: 100%; padding: 14px; border-radius: 14px; border: 2px dashed var(--primary-color); background: transparent; color: var(--primary-color); font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .add-member-btn:active { background: rgba(0, 122, 255, 0.1); }
+        .submit-btn { width: 100%; padding: 16px; border-radius: 14px; border: none; background: var(--primary-color); color: white; font-size: 17px; font-weight: 600; cursor: pointer; margin-top: 10px; transition: background-color 0.3s ease; }
+        .submit-btn:disabled { opacity: 0.6; cursor: wait; }
+        #status-msg { text-align: center; margin-top: 15px; font-weight: 500; min-height: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="main-container">
+        <div class="glass-card">
+            <h1>New Family Entry</h1>
+            <p class="subtitle">Secure Database Entry</p>
+            
+            <form id="familyForm">
+                
+                <div class="section-badge">Head of Family</div>
+                
+                <label class="input-label">Family Name / House Name</label>
+                <input type="text" id="familyName" placeholder="Type here..." required>
+
+                <label class="input-label">Name (Head of Family)</label>
+                <input type="text" id="headName" placeholder="Name of the head of family / the person entering the form" required>
+
+                <div class="row-inputs">
+                    <div class="half-width">
+                        <label class="input-label">Date of Birth</label>
+                        <input type="date" id="headDob">
+                    </div>
+                    <div class="half-width">
+                        <label class="input-label">Anniversary</label>
+                        <input type="date" id="headAnniv">
+                    </div>
+                </div>
+
+                <label class="input-label">Contact Number</label>
+                <input type="tel" id="headContact" placeholder="Phone Number">
+
+                <div class="divider"></div>
+                <label class="input-label">Location / Map Link</label>
+                <div class="location-group">
+                    <input type="text" id="mapText" placeholder="Address">
+                    <button type="button" id="btn-geo" class="gps-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        GPS
+                    </button>
+                </div>
+                <input type="hidden" id="gpsLink">
+
+                <div class="divider"></div>
+                <div class="section-title">
+                    Family Members
+                    <span class="light-text">(Brother, Sister, Husband, Wife etc.)</span>
+                </div>
+
+                <div id="members-container"></div>
+
+                <button type="button" id="btn-add-member" class="add-member-btn">
+                    + Add Member
+                </button>
+
+                <div class="divider"></div>
+
+                <label class="input-label" style="color:var(--primary-color);">🔒 Admin Password</label>
+                <input type="password" id="adminPass" placeholder="Enter Password (Sent in Church Group)" style="margin-bottom:15px; border-color:var(--primary-color);">
+
+                <button type="button" id="btn-submit" class="submit-btn">Submit Entire Family</button>
+                <p id="status-msg"></p>
+
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. PASTE YOUR GOOGLE SCRIPT URL HERE ---
+        // Make sure it ends in /exec
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyRXtT1E4Y6R-ZfO0Ey0dd1jr4IwUGlOVpY0-_c2xsYSyPilSTisywb3dFGPrwV5_IeYw/exec'; 
+
+        const container = document.getElementById('members-container');
+        const btnAdd = document.getElementById('btn-add-member');
+        const btnGeo = document.getElementById('btn-geo');
+        const gpsInput = document.getElementById('gpsLink');
+        const mapInput = document.getElementById('mapText');
+        const submitBtn = document.getElementById('btn-submit');
+        const statusMsg = document.getElementById('status-msg');
+
+        let isEditMode = false;
+
+        // --- 2. ADD MEMBER LOGIC ---
+        btnAdd.addEventListener('click', () => {
+            const div = document.createElement('div');
+            div.className = 'member-card fade-in';
+            div.innerHTML = `
+                <div class="member-header">
+                    <span class="member-title">New Member</span>
+                    <button type="button" class="remove-btn" onclick="this.closest('.member-card').remove()">Remove</button>
+                </div>
+                <label class="input-label">Relation</label><input type="text" class="m-relation" placeholder="Type here..." required>
+                <label class="input-label">Name</label><input type="text" class="m-name" placeholder="Name" required>
+                <div class="row-inputs">
+                    <div class="half-width"><label class="input-label">DOB</label><input type="date" class="m-dob"></div>
+                    <div class="half-width"><label class="input-label">Anniv</label><input type="date" class="m-anniv"></div>
+                </div>
+                <label class="input-label">Contact</label><input type="tel" class="m-contact" placeholder="Phone">
+            `;
+            container.appendChild(div);
+        });
+
+        // --- 3. GPS LOGIC (FIXED LINK) ---
+        btnGeo.addEventListener('click', () => {
+            if (!navigator.geolocation) { alert("GPS not supported"); return; }
+            btnGeo.innerHTML = "Locating...";
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    // CORRECT FORMAT: https://www.google.com/maps?q=LAT,LNG
+                    const link = `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
+                    
+                    gpsInput.value = link;
+                    btnGeo.innerHTML = "✅ GPS Saved";
+                    btnGeo.classList.add('done');
+                    
+                    if(mapInput.value === "") mapInput.value = "GPS Location";
+                },
+                (err) => { 
+                    console.error(err); 
+                    btnGeo.innerHTML = "❌ Error"; 
+                    alert("GPS Error: " + err.message); 
+                },
+                { enableHighAccuracy: true }
+            );
+        });
+
+        // --- 4. SUBMIT LOGIC ---
+        submitBtn.addEventListener('click', async () => {
+            
+            const adminPass = document.getElementById('adminPass').value;
+            if (!adminPass) {
+                alert("🔒 Please enter the Admin Password.");
+                document.getElementById('adminPass').focus();
+                return;
+            }
+
+            if (!document.getElementById('familyName').value || !document.getElementById('headName').value) {
+                alert("Family Name and Head Name are required.");
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Connecting...";
+            statusMsg.innerText = "Sending Data...";
+            statusMsg.style.color = "blue";
+
+            const mapFinal = gpsInput.value ? `${mapInput.value} / ${gpsInput.value}` : mapInput.value;
+            
+            const headData = {
+                familyName: document.getElementById('familyName').value || "-",
+                name: document.getElementById('headName').value || "-",
+                dob: document.getElementById('headDob').value || "-", 
+                anniversary: document.getElementById('headAnniv').value || "-",
+                contact: document.getElementById('headContact').value || "-",
+                map: mapFinal
+            };
+
+            const membersData = [];
+            document.querySelectorAll('.member-card').forEach(card => {
+                membersData.push({
+                    relation: card.querySelector('.m-relation').value || "-",
+                    name: card.querySelector('.m-name').value || "-",
+                    dob: card.querySelector('.m-dob').value || "-",
+                    anniversary: card.querySelector('.m-anniv').value || "-",
+                    contact: card.querySelector('.m-contact').value || "-"
+                });
+            });
+
+            const payload = {
+                authKey: adminPass,
+                action: isEditMode ? 'updateFamily' : 'addFamily',
+                head: headData,
+                members: membersData
+            };
+
+            try {
+                // Using text/plain to avoid CORS
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    redirect: 'follow',
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify(payload)
+                });
+                
+                const rawText = await response.text();
+                let result;
+                try {
+                    result = JSON.parse(rawText);
+                } catch (e) {
+                    throw new Error("Server sent invalid response: " + rawText);
+                }
+
+                if (result.result === "success") {
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "Success!"; 
+                    submitBtn.style.background = "var(--success-color)";
+                    
+                    statusMsg.innerText = "✅ Data Verified & Saved!";
+                    statusMsg.style.color = "var(--success-color)";
+                    
+                    document.getElementById('adminPass').value = "";
+                    isEditMode = true; 
+                    
+                } else {
+                    throw new Error(result.message);
+                }
+
+            } catch (error) {
+                console.error(error);
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Try Again";
+                statusMsg.innerText = "❌ " + error.message;
+                statusMsg.style.color = "var(--error-color)";
+            }
+        });
+    </script>
+</body>
+</html>
+    
+  </body>
+  
+</html>
